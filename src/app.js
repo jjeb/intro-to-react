@@ -9,8 +9,10 @@ const Pet = (props) => {
 
 //Class component
 class App extends React.Component {
+
   handleTitleClick(){
     alert('Someone clicked the title')
+    console.log(this)
   }
 
   render() {
