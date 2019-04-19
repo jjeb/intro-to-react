@@ -1,0 +1,29 @@
+{
+  "name": "intro-to-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.{js, jsx, json, css, html, json} \"",
+    "format:check": "prettier --list-different \"src/**/*.{js, jsx, json, css, html, json} \"",
+    "lint": "eslint \"**/*.{js,jsx}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjeb/intro-to-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjeb/intro-to-react/issues"
+  },
+  "homepage": "https://github.com/jjeb/intro-to-react#readme",
+  "devDependencies": {
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-with-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.17.0"
+  }
+}
