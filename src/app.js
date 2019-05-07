@@ -1,41 +1,67 @@
 import React from "react";
 import { render } from "react-dom";
+import pf from "petfinder-client";
 import Pet from "./Pet";
 
+const petFinder = pf({
+  key: process.env.API_KEY,
+  secret: process.env.API_SECRET
+});
+
 class App extends React.Component {
-  handleTitleClick() {
-    alert("Someone clicked the title");
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pets: []
+    };
+  }
+
+  componentDidMount() {
+    petFinder.pet
+      .find({ output: "full", location: "San Francisco, CA" })
+      .then(data => {
+        let pets;
+
+        if (data.petfinder.pets && data.petfinder.pets.pet) {
+          if (Array.isArray(data.petfinder.pets.pet)) {
+            pets = data.petfinder.pets.pet;
+          } else {
+            pets = [data.petfinder.pets.pet];
+          }
+        } else {
+          pets = [];
+        }
+        this.setState({
+          pets: pets
+        });
+      });
   }
 
   render() {
-    //   return React.createElement("div", {}, [
-    //     React.createElement(
-    //       "h1",
-    //       { onClick: this.handleTitleClick },
-    //       "Adopt Me!"
-    //     ),
-    //     React.createElement(Pet, {
-    //       name: "luna",
-    //       animal: "dog",
-    //       breed: "Havanese"
-    //     }),
-    //     React.createElement(Pet, {
-    //       name: "Sun",
-    //       animal: "Cat",
-    //       breed: "mixed"
-    //     }),
-    //     React.createElement(Pet, {
-    //       name: "Sea",
-    //       animal: "Cat",
-    //       breed: "Mixed"
-    //     })
-    //   ]);
     return (
       <div>
         <h1>Adopt Me</h1>
-        <Pet name="Luna" animal="dog" breed="Havanese" />
-        <Pet name="Sun" animal="Cat" breed="mixed" />
-        <Pet name="Sea" animal="Cat" breed="Mixed" />
+        <div>
+          {this.state.pets.map(pet => {
+            let breed;
+
+            if (Array.isArray(pet.breeds.breed)) {
+              breed = pet.breeds.breed.join(", ");
+            } else {
+              breed = pet.breeds.breed;
+            }
+
+            return (
+              <Pet
+                key={pet.id}
+                animal={pet.animal}
+                name={pet.name}
+                breed={breed}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
