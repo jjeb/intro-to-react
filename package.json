@@ -33,6 +33,7 @@
     "prettier": "^1.17.0"
   },
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "lodash": "^4.17.11",
     "petfinder-client": "2.0.1",
     "react": "^16.8.6",
