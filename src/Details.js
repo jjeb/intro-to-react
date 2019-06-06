@@ -20,9 +20,10 @@ class Details extends React.Component {
     petFinder.pet
       .get({ output: "full", id: this.props.id })
       .then(data => {
-        let breed;
-        const pet = data.petfinder;
 
+        let breed;
+        const pet = data.petfinder.pet;
+        // debugger
         if (Array.isArray(pet.breeds.breed)) {
           breed = pet.breeds.breed.join(", ");
         } else {
@@ -39,13 +40,30 @@ class Details extends React.Component {
           loading: false
         });
       })
-      // .catch(() => {
-      //   navigate("/");
-      // });
+      .catch(() => {
+        navigate("/");
+      });
   }
 
   render() {
-    return <h1>lol</h1>;
+
+    if (this.state.loading) {
+      return <h1>Loading ...</h1>;
+    }
+
+    const { animal, breed, location, description, name } = this.state;
+
+    return (
+      <div className="details">
+        <div>
+          <h1>{name}</h1>
+          <h2>
+            {animal} - {breed} - {location}
+          </h2>
+          <p>{description}</p>
+        </div>
+      </div>
+    );
   }
 }
 
