@@ -19,7 +19,7 @@ class Carousel extends React.Component {
     this.setState({
       active: +event.target.dataset.index
     });
-  }
+  };
 
   render() {
     const { photos, active } = this.state;
