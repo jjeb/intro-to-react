@@ -8,8 +8,8 @@ const petFinder = pf({
 });
 
 class Results extends React.Component {
- state = {
-   pets: []
+  state = {
+    pets: []
   };
 
   componentDidMount() {

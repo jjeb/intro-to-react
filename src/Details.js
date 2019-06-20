@@ -1,6 +1,7 @@
 import React from "react";
 import pf from "petfinder-client";
 import { navigate } from "@reach/router/lib/history";
+import Carousel from "./Carousel";
 
 const petFinder = pf({
   key: process.env.API_KEY,
@@ -16,7 +17,6 @@ class Details extends React.Component {
     petFinder.pet
       .get({ output: "full", id: this.props.id })
       .then(data => {
-
         let breed;
         const pet = data.petfinder.pet;
         // debugger
@@ -42,15 +42,15 @@ class Details extends React.Component {
   }
 
   render() {
-
     if (this.state.loading) {
       return <h1>Loading ...</h1>;
     }
 
-    const { animal, breed, location, description, name } = this.state;
+    const { animal, breed, location, description, name, media } = this.state;
 
     return (
       <div className="details">
+        <Carousel media={media} />
         <div>
           <h1>{name}</h1>
           <h2>
