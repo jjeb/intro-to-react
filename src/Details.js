@@ -19,7 +19,6 @@ class Details extends React.Component {
       .then(data => {
         let breed;
         const pet = data.petfinder.pet;
-        // debugger
         if (Array.isArray(pet.breeds.breed)) {
           breed = pet.breeds.breed.join(", ");
         } else {
